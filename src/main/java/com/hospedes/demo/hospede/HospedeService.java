@@ -1,4 +1,4 @@
-package com.hospedes.demo.service;
+package com.hospedes.demo.hospede;
 
 public interface HospedeService {
     

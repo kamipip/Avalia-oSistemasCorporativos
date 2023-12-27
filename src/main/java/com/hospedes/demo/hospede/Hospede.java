@@ -1,4 +1,4 @@
-package com.hospedes.demo.model;
+package com.hospedes.demo.hospede;
 import java.util.Date;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
