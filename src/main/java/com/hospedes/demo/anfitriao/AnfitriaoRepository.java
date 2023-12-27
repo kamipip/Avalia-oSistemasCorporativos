@@ -4,5 +4,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AnfitriaoRepository extends JpaRepository<Anfitriao, Long> {
-    // adicionar métodos personalizados aqui
+    // adicionar métodos 
 }
