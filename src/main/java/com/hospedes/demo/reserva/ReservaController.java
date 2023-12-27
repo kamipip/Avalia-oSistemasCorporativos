@@ -14,11 +14,11 @@ import java.util.List;
 public class ReservaController {
 
     @Autowired
-    private Reserva reservaService;
+    private ReservaService reservaService;
 
     @GetMapping
-    public ResponseEntity<List<Reserva>> listarreservas() {
-        List<Reserva> reservas = reservaService.listarreserva();
+    public ResponseEntity<List<Reserva>> listarReserva() {
+        List<Reserva> reservas = reservaService.listarReservas();
         return new ResponseEntity<>(reservas, HttpStatus.OK);
     }
 

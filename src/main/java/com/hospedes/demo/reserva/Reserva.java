@@ -68,7 +68,7 @@ public class Reserva {
         return null;
     }
 
-    public List<Reserva> listarreserva() {
+    public List<Reserva> listarReserva() {
         return null;
     }
 
