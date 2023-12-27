@@ -1,9 +1,12 @@
-package com.hospedes.demo.model;
+package com.hospedes.demo.reserva;
 import java.util.Date;
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.FutureOrPresent;
 
@@ -59,5 +62,24 @@ public class Reserva {
 
     public void setHospede(String hospede) {
         this.hospede = hospede;
+    }
+
+    public Reserva obterReservaPorId(Long id2) {
+        return null;
+    }
+
+    public List<Reserva> listarreserva() {
+        return null;
+    }
+
+    public Reserva criarReserva(@Valid Reserva reserva) {
+        return null;
+    }
+
+    public Reserva atualizarReserva(Long id2, @Valid Reserva reserva) {
+        return null;
+    }
+
+    public void excluirReserva(Long id2) {
     }
 }
