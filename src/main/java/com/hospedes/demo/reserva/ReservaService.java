@@ -20,20 +20,37 @@ public class ReservaService {
         return reserva.orElse(null);
     }
 
-    public Reserva criarReserva(Reserva reserva) {
-        // Implementar a lógica
-        return reservaRepository.save(reserva);
+public Reserva criarReserva(Reserva reserva) {
+    if (reserva.getDataInicio() == null) {
+        throw new IllegalArgumentException("A data de início da reserva não pode ser nula.");
+    }
+    if (reserva.getDataFim() == null) {
+        throw new IllegalArgumentException("A data de fim da reserva não pode ser nula.");
     }
 
-    public Reserva atualizarReserva(Long id, Reserva reserva) {
-        
-        if (reservaRepository.existsById(id)) {
-            // Implementar a lógica 
-            reserva.setId(id);
-            return reservaRepository.save(reserva);
+    return reservaRepository.save(reserva);
+}
+
+public Reserva atualizarReserva(Long id, Reserva reserva) {
+    Optional<Reserva> reservaExistente = reservaRepository.findById(id);
+    if (reservaExistente.isPresent()) {
+        Reserva reservaAtual = reservaExistente.get();
+        if (reserva.getDataInicio() != null) {
+            reservaAtual.setDataInicio(reserva.getDataInicio());
+        } else {
+            throw new IllegalArgumentException("A data de início da reserva não pode ser nula.");
         }
-        return null; 
+        if (reserva.getDataFim() != null) {
+            reservaAtual.setDataFim(reserva.getDataFim());
+        } else {
+            throw new IllegalArgumentException("A data de fim da reserva não pode ser nula.");
+        }
+
+        return reservaRepository.save(reservaAtual);
     }
+    return null; 
+}
+
 
     public void excluirReserva(Long id) {
         reservaRepository.deleteById(id);
