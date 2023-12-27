@@ -31,7 +31,7 @@ public class Hospede {
         return lista_reservas;
     }
 
-    // Setters
+    
     public void setId(Long id) {
         this.id = id;
     }
