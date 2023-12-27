@@ -19,20 +19,36 @@ public class AcomodacaoService {
         return acomodacao.orElse(null);
     }
 
-    public Acomodacao criarAcomodacao(Acomodacao acomodacao) {
-        // Implementar a lógica
-        return acomodacaoRepository.save(acomodacao);
+public Acomodacao criarAcomodacao(Acomodacao acomodacao) {
+    if (acomodacao.getNome() == null || acomodacao.getNome().isEmpty()) {
+        throw new IllegalArgumentException("O nome da acomodação não pode ser nulo ou vazio.");
+    }
+    if (acomodacao.getNumeroRegistro() == null || acomodacao.getNumeroRegistro().isEmpty()) {
+        throw new IllegalArgumentException("O número de registro da acomodação não pode ser nulo ou vazio.");
     }
 
-    public Acomodacao atualizarAcomodacao(Long id, Acomodacao acomodacao) {
-        
-        if (acomodacaoRepository.existsById(id)) {
-            // Implementar a lógica 
-            acomodacao.setId(id);
-            return acomodacaoRepository.save(acomodacao);
-        }
-        return null; 
+    if (acomodacao.getLocalizacao() == null || acomodacao.getLocalizacao().isEmpty()) {
+        throw new IllegalArgumentException("A localização da acomodação não pode ser nula ou vazia.");
     }
+    return acomodacaoRepository.save(acomodacao);
+}
+
+
+ public Acomodacao atualizarAcomodacao(Long id, Acomodacao acomodacao) {
+    Optional<Acomodacao> acomodacaoExistente = acomodacaoRepository.findById(id);
+    if (acomodacaoExistente.isPresent()) {
+        Acomodacao acomodacaoAtual = acomodacaoExistente.get();
+        
+        if (acomodacao.getNome() != null && !acomodacao.getNome().isEmpty()) {
+            acomodacaoAtual.setNome(acomodacao.getNome());
+        } else {
+            throw new IllegalArgumentException("O nome da acomodação não pode ser nulo ou vazio.");
+        }
+        return acomodacaoRepository.save(acomodacaoAtual);
+    }
+    return null;
+}
+
 
     public void excluirAcomodacao(Long id) {
         acomodacaoRepository.deleteById(id);
