@@ -19,19 +19,30 @@ public class AnfitriaoService {
         return anfitriao.orElse(null);
     }
 
-    public Anfitriao criarAnfitriao(Anfitriao anfitriao) {
-        // Implementar a lógica de validação
-        return anfitriaoRepository.save(anfitriao);
+public Anfitriao criarAnfitriao(Anfitriao anfitriao) {
+    if (anfitriao.getNome() == null || anfitriao.getNome().isEmpty()) {
+        throw new IllegalArgumentException("O nome do anfitrião não pode ser nulo ou vazio.");
     }
+    return anfitriaoRepository.save(anfitriao);
+}
 
-    public Anfitriao atualizarAnfitriao(Long id, Anfitriao anfitriao) {
-        if (anfitriaoRepository.existsById(id)) {
-            // Implementar a lógica de validação 
-            anfitriao.setId(id);
-            return anfitriaoRepository.save(anfitriao);
+
+public Anfitriao atualizarAnfitriao(Long id, Anfitriao anfitriao) {
+    Optional<Anfitriao> anfitriaoExistente = anfitriaoRepository.findById(id);
+    if (anfitriaoExistente.isPresent()) {
+        
+        Anfitriao anfitriaoAtual = anfitriaoExistente.get();
+        if (anfitriao.getNome() != null && !anfitriao.getNome().isEmpty()) {
+            anfitriaoAtual.setNome(anfitriao.getNome());
+        } else {
+            throw new IllegalArgumentException("O nome do anfitrião não pode ser nulo ou vazio.");
         }
-        return null; 
+        
+        return anfitriaoRepository.save(anfitriaoAtual);
     }
+    return null; 
+}
+
 
     public void excluirAnfitriao(Long id) {
         anfitriaoRepository.deleteById(id);
