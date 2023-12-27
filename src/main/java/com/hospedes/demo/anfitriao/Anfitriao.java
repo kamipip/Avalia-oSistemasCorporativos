@@ -1,4 +1,4 @@
-package com.hospedes.demo.model;
+package com.hospedes.demo.anfitriao;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
